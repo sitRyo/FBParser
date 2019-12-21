@@ -8,18 +8,20 @@
 
 /* handmade */
 #include "CurlProc.hpp"
+#include "OutputFile.hpp"
 
 int main(int argc, char* argv[]) {
-  std::string URL {"https://www.apple.com/jp/"};
+  std::string URL {"https://www.apple.com/"};
   if (argc >= 2) {
     URL = argv[1];
   }
 
   // curlが初期化
   rgpg::CurlProc proc;
+  rgpg::OutputFile output_file;
   auto contents {proc.get_HTML(URL)};
-
-  std::cout << contents.memory << std::endl;
+    
+  output_file.out(contents.memory, "index.html");
 
   return 0;
 }
