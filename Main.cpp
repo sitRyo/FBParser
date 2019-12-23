@@ -153,7 +153,7 @@ class MyProc {
 
 int main(int argc, char* argv[]) {
   std::string URL {"https://www.apple.com"};
-  std::string absolute_path {"file:///E:/production/HTMLParser/build/"};
+  std::string absolute_path {argv[2]};
   
   if (argc >= 2) {
     URL = argv[1];
