@@ -1,6 +1,11 @@
 #include <iostream>
+#include <filesystem>
+
+using namespace std;
+using namespace std::filesystem;
 
 int main() {
-  int a = 0;
-  std::cout << a << "\n";
+  path p {"abc/"};
+  cout << p.filename() << endl;
+  cout << p.extension() << endl;
 }

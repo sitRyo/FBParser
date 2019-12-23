@@ -7,3 +7,4 @@ set(CMAKE_CXX_FLAGS "-Wall")
 
 add_executable(prog Main.cpp)
 target_link_libraries(prog curl)
+target_link_libraries(prog stdc++fs)

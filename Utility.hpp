@@ -8,6 +8,7 @@
 
 #include <list>
 #include <string>
+#include <regex>
 
 namespace rgpg {
   namespace util {
@@ -31,12 +32,27 @@ namespace rgpg {
       return ret;
     }
 
-    
+    /**
+     * is_alternative_url
+     * @return bool
+     * URLがアップルが持つ別言語サイトかどうか判定する。
+     * あまりにも用途がアプリケーションによりすぎているのでUtilityに隔離
+     */
+    auto is_alternative_url(std::string const& url) {
+      std::regex re(R"(https://www\.apple\.com)");
+      return std::regex_search(url.begin(), url.end(), re);
+    }
+
+    /**
+     * is_valid_url
+     * @return bool
+     * URLかどうか調べる。
+     * 本当は正規表現でしっかり調べる必要があるが、今は時間がないので先頭がhttpかどうかで判定する。
+     */
+    auto is_valid_url(std::string const& url) {
+      return url.substr(0, 4) == "http";
+    }
   }
 }
-
-/**
- * 
- */ 
 
 #endif // _INC_UTILITY__

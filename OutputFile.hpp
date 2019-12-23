@@ -32,17 +32,12 @@ namespace rgpg {
     void close(std::fstream &f_stream) const {
       f_stream.close();
     } 
-
-  public:
-    explicit OutputFile() {}
-
-    ~OutputFile() {}
-
+    
     /**
      * TODO file_name の右辺値化 std::forwardを使った完全転送
      */
-    bool out(std::string contents, std::string file_name) const {
-      std::cout << contents << std::endl;
+    bool out(std::string const& contents, std::string const& file_name) const {
+      // std::cout << contents << std::endl;
       std::fstream f_stream;
       if (!this->open(file_name, f_stream)) {
         return false;
@@ -50,6 +45,18 @@ namespace rgpg {
       f_stream << contents << std::endl;;
       this->close(f_stream);
       return true;
+    }
+
+  public:
+    OutputFile() {}
+
+    ~OutputFile() {}
+
+    /**
+     * TODO Universal forward
+     */
+    bool operator() (std::string const& contents, std::string const& file_name) const {
+      return this->out(contents, file_name);
     }
   };
   
